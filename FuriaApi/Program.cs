@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSingleton<MongoDbService>(); // Se você estiver usando MongoDbService
 builder.Services.AddHttpClient<AIService>();
+builder.Services.AddTransient<AIService>();
 builder.Configuration.AddJsonFile("appsettings.json");
 builder.Services.AddControllers();
 
