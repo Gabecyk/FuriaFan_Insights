@@ -1,0 +1,322 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.anton-regular {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.navBar {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    font-size: 16pt;
+    font-family: "Anton", sans-serif;
+}
+
+.navBar>div {
+    width: 150px;
+}
+
+.navBar>img {
+    height: 30px;
+}
+
+.iconStore {
+    font-size: 30pt;
+    color: black;
+}
+
+.Home {
+    background-color: rgb(39, 38, 38);
+    background-image: image-set('./assets/papeldeparedefuria.png');
+    height: 100%;
+    width: 100%;
+}
+
+.videoF {
+    width: 100%;
+    height: 100vh;
+    object-fit: fill;
+}
+
+.logoimg {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    text-align: left;
+    justify-content: center;
+    width: 100%;
+    padding-left: 20px;
+}
+
+.logoimg > img {
+    width: 100px;
+    padding-bottom: 30px;
+}
+
+.logoimg > h1 {
+    color: white;
+
+    font-size: 20pt;
+    text-shadow: 1px 1px black;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-bottom: 30px;
+}
+
+.logoimg > .boxArrow {
+    background-color: rgba(0, 0, 0, 0.616);
+    width: 140px;
+    height: 70px;
+    color: white;
+    font-size: 25pt;
+    border-radius: 13pt;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoimg > .boxArrow:hover {
+    cursor: pointer;
+    background-color: rgb(0, 0, 0);
+    color: rgb(83, 83, 83);
+}
+
+.video-container {
+    position: relative; 
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden; 
+  }
+
+  .video-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%; 
+    height: 100%;
+    background: linear-gradient(to right, rgb(0, 0, 0), transparent); 
+    pointer-events: none; 
+    z-index: 1; 
+  }
+
+.subH2 {
+    margin-top: 160px;
+    text-align: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30pt;
+}
+
+.form{
+    padding: 15px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.formPart {
+    background-color: rgb(59, 59, 59);
+    width: 50vw;
+
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px rgba(7, 7, 7, 0.37);
+}
+
+.form > input {
+    background-color: rgb(59, 59, 59);
+    height: 50px;
+    border-radius: 10pt;
+    font-size: 14pt;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid white;
+    color: white;
+}
+
+.form > select {
+    background-color: rgb(59, 59, 59);
+    height: 50px;
+    border-radius: 10pt;
+    font-size: 14pt;
+    padding: 10px;
+    margin-bottom: 15px;
+    color: rgb(255, 255, 255);
+    border: 1px solid white;
+}
+
+.form > select > option {
+    border: 1px solid white;
+}
+
+.form > textarea {
+    background-color: rgb(59, 59, 59);
+    color: white;
+    font-size: 14pt;
+    margin-bottom: 25px;
+    height: 120px;
+    padding: 5px;
+    max-height: 120px;
+}
+
+.form > button {
+    width: 190px;
+    margin: 0 auto;
+    height: 65px;
+    border-radius: 12px;
+    border: 1px solid white;
+    background-color: rgb(59, 59, 59);
+    color: white;
+    font-size: 18pt;
+}
+
+.form > button:hover {
+    background-color: rgb(44, 44, 44);
+    cursor: pointer;
+    color: rgb(224, 224, 224);
+}
+
+.form > p {
+    text-align: left;
+    padding-left: 5px;
+    font-size: 16pt;
+    font-family:Arial, Helvetica, sans-serif;
+    padding-bottom: 5px;
+    color: rgb(209, 207, 207);
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #fff;
+    border-top: 3px solid #000;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: auto;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+.space {
+    height: 30px;
+}
+
+.resultPage {
+    background-color: rgb(39, 38, 38);
+    background-image: image-set('./assets/papeldeparedefuria.png');
+    height: 100vh;
+    width: 100%;
+}
+
+.resultPage > h2 {
+    color: white;
+    font-size: 30pt;
+    text-align: center;
+    padding-top: 20px;
+    font-family: "Anton", sans-serif;
+    font-weight: lighter;
+}
+
+/* 🔽 Responsivo para telas menores que 600px */
+@media (max-width: 600px) {
+    .navBar {
+        height: auto;
+        padding: 10px;
+        gap: 10px;
+        font-size: 12pt;
+    }
+
+    .navBar>img {
+        height: 25px;
+    }
+
+    .iconStore {
+        font-size: 25pt;
+    }
+
+    .Home {
+        background-color: rgb(39, 38, 38);
+        height: 100%;
+    }
+
+    .videoF {
+        object-fit: cover;
+    }
+
+    .logoimg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -45%);
+        z-index: 1;
+    }
+
+    .logoimg > img {
+        width: 100px;
+    }
+
+    .logoimg > h1 {
+        color: white;
+        padding-bottom: 100px;
+        font-size: 15pt;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .logoimg > .boxArrow {
+        background-color: rgba(58, 58, 58, 0.555);
+        margin: 0 auto;
+        width: 150px;
+        height: 70px;
+        color: white;
+        font-size: 40pt;
+        border-radius: 13pt;
+        border: 1px solid white;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .formPart {
+        width: 75vw;
+        text-align: center;
+        justify-content: center;
+        margin: 0 auto;
+        border-radius: 15px;
+    }
+
+    .subH2 {
+        font-size: 20pt;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .video-container::before {
+        width: 100vw;
+    }
+
+    .resultPage > h2 {
+        font-size: 20pt;
+        font-weight: lighter;
+    }
+}
