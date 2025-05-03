@@ -32,13 +32,15 @@ namespace FuriaAPI.Services
             var requestBody = new
             {
                 model = "command-r",
-                prompt = prompt,
-                max_tokens = 300,
+                messages = new[]
+                {
+            new { role = "user", content = prompt }
+        },
                 temperature = 0.7
             };
 
             var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("v1/generate", content);
+            var response = await _httpClient.PostAsync("v1/chat", content);
             var responseString = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
@@ -50,7 +52,11 @@ namespace FuriaAPI.Services
             try
             {
                 using var doc = JsonDocument.Parse(responseString);
-                var text = doc.RootElement.GetProperty("generations")[0].GetProperty("text").GetString();
+                var messages = doc.RootElement.GetProperty("messages");
+                var assistantMessage = messages.EnumerateArray()
+                    .FirstOrDefault(m => m.GetProperty("role").GetString() == "assistant");
+
+                var text = assistantMessage.GetProperty("content").GetString();
                 var json = ExtractJsonResponse(text);
 
                 var items = JsonSerializer.Deserialize<List<RecommendationJson>>(json);

@@ -26,3 +26,4 @@ dist-ssr
 **/obj/
 
 .env
+appsettings.Local.json
