@@ -33,9 +33,26 @@ namespace FuriaAPI.Services
                 return new List<Recommendation>();
             }
 
-            var prompt = string.IsNullOrEmpty(jogoFavorito)
-                ? $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link."
-                : $"Recomende 3 conteúdos sobre {jogoFavorito} para um fã que disse: '{mensagem}'. Responda em JSON: type, title, link.";
+            string prompt;
+
+            if (string.IsNullOrEmpty(mensagem))
+            {
+                if(jogoFavorito == "Valorant")
+                    prompt = $"Fale sobre o time de valorant da Furia, recomende esse link da furia instagram 'https://www.instagram.com/furiagg/', recomende esse link do youtube da furia 'https://www.youtube.com/watch?v=tjMs5UuK_S8'. E responda oque o fã disse :{mensagem}. Forneça um JSON com: type, title, link.";
+                else if(jogoFavorito == "Counter Strike 2")
+                    prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
+                else if(jogoFavorito == "Rocket League")
+                    prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
+                else if(jogoFavorito == "League of Legends")
+                    prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
+                else if(jogoFavorito == "Rainbow Six")
+                    prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
+                
+            }
+            else
+            {
+                prompt = $"Recomende 3 conteúdos sobre {jogoFavorito} para um fã que disse: '{mensagem}'. Responda em JSON: type, title, link.";
+            }
 
             var requestBody = new
             {
@@ -53,7 +70,6 @@ namespace FuriaAPI.Services
             var responseString = await response.Content.ReadAsStringAsync();
 
 
-            // 💬 Adicione este log:
             Console.WriteLine("🟡 Resposta bruta da API Cohere:");
             Console.WriteLine(responseString);
 
@@ -95,7 +111,6 @@ namespace FuriaAPI.Services
 
         private string ExtractJsonResponse(string text)
         {
-            // Remove crases e blocos ```json
             text = text.Replace("```json", "").Replace("```", "").Trim();
 
             int start = text.IndexOf('[');
