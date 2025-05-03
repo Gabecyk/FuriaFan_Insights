@@ -38,7 +38,7 @@ namespace FuriaAPI.Services
                 prompt = $@"
                 Fale sobre o time de Valorant da FURIA.
                 Responda o que o fã disse: '{mensagem}'.
-                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o YouTube 'https://www.youtube.com/watch?v=tjMs5UuK_S8'.
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'conheça o time da furia' 'https://www.youtube.com/watch?v=tjMs5UuK_S8'.
 
                 Forneça um JSON com os seguintes campos:
                 - message: uma mensagem de resposta ao fã
