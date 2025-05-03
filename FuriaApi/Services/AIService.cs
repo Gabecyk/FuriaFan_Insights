@@ -25,6 +25,12 @@ namespace FuriaAPI.Services
 
         public async Task<List<Recommendation>> GetRecommendations(string jogoFavorito, string mensagem)
         {
+            if (string.IsNullOrWhiteSpace(mensagem))
+            {
+                Console.WriteLine("Erro: Mensagem do fã está vazia.");
+                return new List<Recommendation>();
+            }
+
             var prompt = string.IsNullOrEmpty(jogoFavorito)
                 ? $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link."
                 : $"Recomende 3 conteúdos sobre {jogoFavorito} para um fã que disse: '{mensagem}'. Responda em JSON: type, title, link.";
