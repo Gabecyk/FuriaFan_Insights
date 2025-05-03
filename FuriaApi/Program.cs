@@ -4,38 +4,43 @@ using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddSingleton<MongoDbService>(); // Se você estiver usando MongoDbService
-builder.Services.AddHttpClient<AIService>();
+// 🔐 Carrega configurações com suporte a variáveis de ambiente e appsettings.Local.json
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
+// 📦 Serviços
+builder.Services.AddSingleton<MongoDbService>();
+builder.Services.AddHttpClient<AIService>(); // Usa IHttpClientFactory
 builder.Services.AddTransient<AIService>();
-builder.Configuration.AddJsonFile("appsettings.json");
+
 builder.Services.AddControllers();
 
-// Configure CORS
+// 🌐 CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend", builder =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        builder.WithOrigins(
-                    "http://localhost:5173",
-                    "https://furiafaninsights.netlify.app"
-                )
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+        policy.WithOrigins(
+                "http://localhost:5173",
+                "https://furiafaninsights.netlify.app")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
     });
 });
 
-// Configure API behavior
+// ⚠️ Validação de modelos customizada
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.InvalidModelStateResponseFactory = actionContext =>
     {
         var errors = actionContext.ModelState
-                .Where(e => e.Value.Errors.Count > 0)
-                .ToDictionary(
-                    kvp => kvp.Key,
-                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-                );
+            .Where(e => e.Value.Errors.Count > 0)
+            .ToDictionary(
+                kvp => kvp.Key,
+                kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+            );
 
         return new BadRequestObjectResult(new
         {
@@ -48,23 +53,26 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     };
 });
 
-// Configure logging
+// 🧭 Logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
+// 🔍 Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// 🚀 Pipeline
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
-app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
 
