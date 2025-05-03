@@ -35,24 +35,19 @@ namespace FuriaAPI.Services
 
             string prompt = "";
 
-            if (string.IsNullOrEmpty(mensagem))
-            {
-                if(jogoFavorito == "Valorant")
-                    prompt = $"Fale sobre o time de valorant da Furia, recomende esse link da furia instagram 'https://www.instagram.com/furiagg/', recomende esse link do youtube da furia 'https://www.youtube.com/watch?v=tjMs5UuK_S8'. E responda oque o fã disse :{mensagem}. Forneça um JSON com: type, title, link.";
-                else if(jogoFavorito == "Counter Strike 2")
-                    prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
-                else if(jogoFavorito == "Rocket League")
-                    prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
-                else if(jogoFavorito == "League of Legends")
-                    prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
-                else
-                    prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
-                
-            }
+
+            if (jogoFavorito == "Valorant")
+                prompt = $"Fale sobre o time de valorant da Furia, recomende esse link da furia instagram 'https://www.instagram.com/furiagg/', recomende esse link do youtube da furia 'https://www.youtube.com/watch?v=tjMs5UuK_S8'. E responda oque o fã disse :{mensagem}. Forneça um JSON com: type, title, link.";
+            else if (jogoFavorito == "Counter Strike 2")
+                prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
+            else if (jogoFavorito == "Rocket League")
+                prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
+            else if (jogoFavorito == "League of Legends")
+                prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
             else
-            {
-                prompt = $"Recomende 3 conteúdos sobre {jogoFavorito} para um fã que disse: '{mensagem}'. Responda em JSON: type, title, link.";
-            }
+                prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
+
+
 
             var requestBody = new
             {
