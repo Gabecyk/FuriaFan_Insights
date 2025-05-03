@@ -45,7 +45,7 @@ namespace FuriaAPI.Services
                 Forneça um JSON com os seguintes campos:
                 - message: uma mensagem de resposta ao fã
                 - recommendations: uma lista de objetos com: type, title, link
-                ";
+                " ;
             else if (jogoFavorito == "Counter Strike 2")
                 prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
             else if (jogoFavorito == "Rocket League")
