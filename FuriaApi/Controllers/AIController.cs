@@ -27,15 +27,15 @@ namespace FuriaAPI.Controllers
                 return BadRequest(new { error = "A mensagem do fã não pode estar vazia." });
             }
 
-            var recomendacoes = await _aiService.GetRecommendations(input.JogoFavorito, input.Mensagem);
+            var resposta = await _aiService.GetRecommendations(input.JogoFavorito, input.Mensagem);
 
-            if (recomendacoes.Count == 0)
+            if (resposta == null || resposta.Recommendations == null || resposta.Recommendations.Count == 0)
             {
                 return StatusCode(502, new { error = "Erro ao gerar recomendações com a API Cohere." });
             }
 
             _logger.LogInformation("Recomendações geradas com sucesso.");
-            return Ok(recomendacoes);
+            return Ok(resposta);
         }
     }
 }

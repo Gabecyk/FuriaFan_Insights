@@ -5,7 +5,7 @@ function PaginaResposta() {
     const location = useLocation();
     const resposta = location.state;
     const [recommendations, setRecommendations] = useState([]);
-    const [message, setMessage] = useState(""); // <-- NOVO estado para mensagem
+    const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -20,9 +20,7 @@ function PaginaResposta() {
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/api/ai/recomendar`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         jogoFavorito: resposta.jogoFavorito,
                         mensagem: resposta.mensagem,
@@ -34,8 +32,8 @@ function PaginaResposta() {
                 }
 
                 const data = await response.json();
-                setMessage(data.message); // <-- Armazena a mensagem do backend
-                setRecommendations(data.recommendations || []); // <-- Armazena recomendações
+                setMessage(data.message);
+                setRecommendations(data.recommendations || []);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -46,24 +44,26 @@ function PaginaResposta() {
         fetchRecommendations();
     }, [resposta]);
 
-    let nivelExibicao = resposta?.tempoFuria;
-    if (nivelExibicao === "menos de 1 ano") {
-        nivelExibicao = "Fã iniciante! Veja os conteúdos abaixo da Furia sobre seus interesses.";
-    } else if (nivelExibicao === "1 a 3 anos") {
-        nivelExibicao = "Fã Raiz! Veja os conteúdos abaixo da Furia sobre seus interesses.";
-    } else if (nivelExibicao === "mais de 3 anos") {
-        nivelExibicao = "FURIOSO MASTER! Veja os conteúdos abaixo da Furia sobre seus interesses.";
-    } else {
-        nivelExibicao = "Fã Iniciante! Veja os conteúdos abaixo da Furia sobre seus interesses.";
-    }
+    const getNivelMensagem = (tempo) => {
+        switch (tempo) {
+            case "menos de 1 ano":
+                return "Fã iniciante! Veja os conteúdos abaixo da FURIA sobre seus interesses.";
+            case "1 a 3 anos":
+                return "Fã Raiz! Veja os conteúdos abaixo da FURIA sobre seus interesses.";
+            case "mais de 3 anos":
+                return "FURIOSO MASTER! Veja os conteúdos abaixo da FURIA sobre seus interesses.";
+            default:
+                return "Fã Iniciante! Veja os conteúdos abaixo da FURIA sobre seus interesses.";
+        }
+    };
 
     if (error) {
-        return <div>Erro: {error}</div>;
+        return <div className="erro">Erro: {error}</div>;
     }
 
     return (
         <div className="resultPage">
-            <h2>{nivelExibicao}</h2>
+            <h2>{getNivelMensagem(resposta?.tempoFuria)}</h2>
 
             {loading ? (
                 <div>Carregando recomendações...</div>
@@ -74,12 +74,14 @@ function PaginaResposta() {
                             <p><strong>Mensagem para você:</strong> {message}</p>
                         </div>
                     )}
+
                     <h3>Conteúdo Recomendado:</h3>
+
                     {recommendations.length > 0 ? (
                         <ul>
                             {recommendations.map((item, index) => (
                                 <li key={index}>
-                                    <strong>{item.type}: </strong>
+                                    <strong>{item.type}:</strong>{" "}
                                     <a href={item.link} target="_blank" rel="noopener noreferrer">
                                         {item.title}
                                     </a>
