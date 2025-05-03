@@ -20,14 +20,6 @@ namespace FuriaAPI.Controllers
         [HttpPost("recomendar")]
         public async Task<IActionResult> Post([FromBody] FanInput input)
         {
-            if (string.IsNullOrWhiteSpace(input.Mensagem))
-            {
-                return BadRequest("A mensagem não pode estar vazia.");
-            }
-
-            var recommendations = await _aiService.GetRecommendations(input.JogoFavorito, input.Mensagem);
-            return Ok(recommendations);
-
             _logger.LogInformation($"Recebido: jogoFavorito={input.JogoFavorito}, mensagem={input.Mensagem}");
 
             if (string.IsNullOrWhiteSpace(input.Mensagem))
