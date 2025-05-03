@@ -1,41 +1,53 @@
-using FuriaAPI.Models;
-using FuriaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using FuriaAPI.Services;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging; // Adicione esta diretiva using
 
 namespace FuriaAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/ai")]
     public class AIController : ControllerBase
     {
         private readonly AIService _aiService;
-        private readonly ILogger<AIController> _logger;
+        private readonly ILogger<AIController> _logger; // Adicione o logger
 
         public AIController(AIService aiService, ILogger<AIController> logger)
         {
             _aiService = aiService;
-            _logger = logger;
+            _logger = logger; // Inicialize o logger
         }
 
-        [HttpPost("recomendar")]
-        public async Task<IActionResult> Post([FromBody] FanInput input)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] AIRequest request)
         {
-            _logger.LogInformation($"Recebido: jogoFavorito={input.JogoFavorito}, mensagem={input.Mensagem}");
-
-            if (string.IsNullOrWhiteSpace(input.Mensagem))
+            // Validação dos dados de entrada
+            if (string.IsNullOrEmpty(request.JogoFavorito) || string.IsNullOrEmpty(request.Mensagem))
             {
-                return BadRequest(new { error = "A mensagem do fã não pode estar vazia." });
+                _logger.LogWarning("JogoFavorito e Mensagem são obrigatórios."); // Registre o aviso
+                return BadRequest("JogoFavorito e Mensagem são obrigatórios.");
             }
 
-            var recomendacoes = await _aiService.GetRecommendations(input.JogoFavorito, input.Mensagem);
-
-            if (recomendacoes.Count == 0)
+            try
             {
-                return StatusCode(502, new { error = "Erro ao gerar recomendações com a API Cohere." });
-            }
+                // Obtenha as recomendações do serviço de IA
+                var recommendations = await _aiService.GetRecommendations(request.JogoFavorito, request.Mensagem);
+                _logger.LogInformation("Recomendações geradas com sucesso."); // Registre o sucesso
 
-            _logger.LogInformation("Recomendações geradas com sucesso.");
-            return Ok(recomendacoes);
+                // Retorne as recomendações
+                return Ok(recommendations);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao processar requisição de recomendações."); // Registre o erro com detalhes
+                return StatusCode(500, "Ocorreu um erro ao processar a requisição."); // Retorne uma mensagem de erro genérica
+            }
         }
+    }
+     // Classe para representar os dados de entrada da requisição
+    public class AIRequest
+    {
+        public string JogoFavorito { get; set; }
+        public string Mensagem { get; set; }
     }
 }

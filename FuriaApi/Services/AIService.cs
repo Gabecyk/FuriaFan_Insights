@@ -20,7 +20,9 @@ namespace FuriaAPI.Services
                 BaseAddress = new Uri("https://api.cohere.ai/")
             };
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
+
             _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+
         }
 
         public async Task<List<Recommendation>> GetRecommendations(string jogoFavorito, string mensagem)
@@ -38,10 +40,11 @@ namespace FuriaAPI.Services
             var requestBody = new
             {
                 model = "command-r",
-                messages = new[]
-                {
-            new { role = "user", content = prompt }
-        },
+                message = prompt,
+                chat_history = new[]
+    {
+        new { role = "USER", message = mensagem }
+    },
                 temperature = 0.7
             };
 
