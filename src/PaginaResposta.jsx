@@ -19,7 +19,7 @@ function PaginaResposta() {
 
             try {
                 // Simulando a chamada à API do C# (substitua pela URL real)
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/ai`, { // Use a porta da sua API
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/ai/recomendar`, { // Use a porta da sua API
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
