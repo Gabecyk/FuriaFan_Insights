@@ -45,7 +45,7 @@ namespace FuriaAPI.Services
                 Forneça um JSON com os seguintes campos:
                 - message: uma mensagem de resposta ao fã
                 - recommendations: uma lista de objetos com: type, title, link
-                " ;
+                ";
             else if (jogoFavorito == "Counter Strike 2")
                 prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
             else if (jogoFavorito == "Rocket League")
@@ -93,17 +93,22 @@ namespace FuriaAPI.Services
                     return new List<Recommendation>();
                 }
 
-                var json = ExtractJsonResponse(text);
+                var cleanedJson = text.Replace("```json", "").Replace("```", "").Trim();
+                var aiResponse = JsonSerializer.Deserialize<AIResponse>(cleanedJson);
 
-
-                var items = JsonSerializer.Deserialize<List<RecommendationJson>>(json);
-                return items?.Select(item => new Recommendation
+                if (aiResponse == null || aiResponse.Recommendations == null)
                 {
-                    Type = item.type,
-                    Title = item.title,
-                    Link = item.link,
+                    Console.WriteLine("Resposta não contém recomendações válidas.");
+                    return new List<Recommendation>();
+                }
+
+                return aiResponse.Recommendations.Select(item => new Recommendation
+                {
+                    Type = item.Type,
+                    Title = item.Title,
+                    Link = item.Link,
                     Tags = new List<string>()
-                }).ToList() ?? new List<Recommendation>();
+                }).ToList();
             }
             catch (Exception ex)
             {
