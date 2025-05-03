@@ -33,7 +33,7 @@ namespace FuriaAPI.Services
 
             string prompt = "";
 
-            if (jogoFavorito == "valorant")
+            if (jogoFavorito.ToLower() == "valorant")
             {
                 prompt = $@"
                 Você é um assistente informe sobre o time de Valorant da FURIA.
@@ -46,7 +46,7 @@ namespace FuriaAPI.Services
                 - recommendations: uma lista de objetos com: type, title, link
                 ";
             }
-            else if(jogoFavorito == "counter strike 2")
+            else if(jogoFavorito.ToLower() == "counter strike 2")
             {
                 prompt = $@"
                 Você é um assistente informe sobre o time de CS GO 2 da FURIA.
@@ -59,7 +59,7 @@ namespace FuriaAPI.Services
                 - recommendations: uma lista de objetos com: type, title, link
                 ";
             }
-            else if(jogoFavorito == "rocket league")
+            else if(jogoFavorito.ToLower() == "rocket league")
             {
                 prompt = $@"
                 Você é um assistente informe sobre o time de Rocket League da FURIA.
