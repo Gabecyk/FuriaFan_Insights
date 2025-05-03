@@ -66,12 +66,16 @@ namespace FuriaAPI.Services
             try
             {
                 using var doc = JsonDocument.Parse(responseString);
-                var messages = doc.RootElement.GetProperty("messages");
-                var assistantMessage = messages.EnumerateArray()
-                    .FirstOrDefault(m => m.GetProperty("role").GetString() == "assistant");
+                var text = doc.RootElement.GetProperty("text").GetString();
 
-                var text = assistantMessage.GetProperty("content").GetString();
+                if (string.IsNullOrWhiteSpace(text))
+                {
+                    Console.WriteLine("Resposta da API Cohere não contém texto.");
+                    return new List<Recommendation>();
+                }
+
                 var json = ExtractJsonResponse(text);
+
 
                 var items = JsonSerializer.Deserialize<List<RecommendationJson>>(json);
                 return items?.Select(item => new Recommendation
@@ -91,10 +95,14 @@ namespace FuriaAPI.Services
 
         private string ExtractJsonResponse(string text)
         {
+            // Remove crases e blocos ```json
+            text = text.Replace("```json", "").Replace("```", "").Trim();
+
             int start = text.IndexOf('[');
             int end = text.LastIndexOf(']');
             if (start >= 0 && end > start)
                 return text.Substring(start, end - start + 1);
+
             return "[]";
         }
 
