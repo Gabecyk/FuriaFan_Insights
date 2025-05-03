@@ -28,7 +28,7 @@ function FormularioFuria() {
 
     const newErrors = {};
     if (!nome.trim()) newErrors.nome = "Nome é obrigatório.";
-    if (!jogoFavorito.trim()) newErrors.jogoFavorito = "Jogo favorito é obrigatório.";
+    
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -113,17 +113,25 @@ function FormularioFuria() {
             <option value="1 a 3 anos">1 a 3 anos</option>
             <option value="mais de 3 anos">Mais de 3 anos</option>
           </select>
+          
           <p>Jogo Favorito</p>
-          <input placeholder="Ex: Valorant....." value={jogoFavorito} onChange={e => setJogoFavorito(e.target.value)} />
-          {errors.jogoFavorito && <span style={{ color: 'red', fontSize: '13pt', fontFamily: 'Arial, Helvetica, sans-serif' }}>{errors.jogoFavorito}</span>}
+          <select value={jogoFavorito} onChange={e => setJogoFavorito(e.target.value)}>
+            <option value="Valorant">Valorant</option>
+            <option value="Counter Strike 2">Counter Strike 2</option>
+            <option value="Rocket League">Rocket League</option>
+            <option value="League Of Legends">League Of Legends</option>
+            <option value="Rainbow Six">Rainbow Six</option>
+            <option value="Apex Legends">Apex Legends</option>
+          </select>
+
           <p>Plataforma</p>
           <select value={plataforma} onChange={e => setPlataforma(e.target.value)}>
             <option value="Pc">Pc</option>
             <option value="Console">Console</option>
             <option value="Celular">Celular</option>
           </select>
-          <p>O que você gosta</p>
-          <textarea placeholder="Ex: Gosto de campeonatos de valorant, Cs ....." value={mensagem} onChange={e => setMensagem(e.target.value)} />
+          <p>Espaço para pergunta</p>
+          <textarea placeholder="Ex: Qual o time de Rocket League da Furia" value={mensagem} onChange={e => setMensagem(e.target.value)} />
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? (
               <div className="spinner" />

@@ -31,12 +31,12 @@ namespace FuriaAPI.Services
                 return null;
             }
 
-            string prompt;
+            string prompt = "";
 
-            if (jogoFavorito == "Valorant")
+            if (jogoFavorito == "valorant")
             {
                 prompt = $@"
-                Fale sobre o time de Valorant da FURIA.
+                Informe sobre o time de Valorant da FURIA.
                 Responda o que o fã disse: '{mensagem}'.
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'conheça o time da furia' 'https://www.youtube.com/watch?v=tjMs5UuK_S8'.
 
@@ -45,9 +45,65 @@ namespace FuriaAPI.Services
                 - recommendations: uma lista de objetos com: type, title, link
                 ";
             }
+            else if(jogoFavorito == "counter strike 2")
+            {
+                prompt = $@"
+                Informe sobre o time de CS GO 2 da FURIA.
+                Responda o que o fã disse: '{mensagem}'.
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'FURIA vs APOGEE - MELHORES MOMENTOS - PGL BUCHAREST 2025' 'https://www.youtube.com/watch?v=MvNP9FuN4qU'.
+
+                Forneça um JSON com os seguintes campos:
+                - message: uma mensagem de resposta ao fã
+                - recommendations: uma lista de objetos com: type, title, link
+                ";
+            }
+            else if(jogoFavorito == "rocket league")
+            {
+                prompt = $@"
+                Informe sobre o time de Rocket League da FURIA.
+                Responda o que o fã disse: '{mensagem}'.
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'Best of Furia | RLCS 22-23 Spring Invitational | Rocket League' 'https://www.youtube.com/watch?v=BDXfF9-4BKo'.
+
+                Forneça um JSON com os seguintes campos:
+                - message: uma mensagem de resposta ao fã
+                - recommendations: uma lista de objetos com: type, title, link
+                ";
+            }
+            else if(jogoFavorito.ToLower() == "league of legends")
+            {
+                prompt = $@"
+                Informe sobre o time de League of Legends da FURIA.
+                Responda o que o fã disse: '{mensagem}'.
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'FOLLOW THE STEPS: Vlog 01 da FURIA LoL na LTA Sul' 'https://www.youtube.com/watch?v=zKe3MLpsddM&t=10s'.
+
+                Forneça um JSON com os seguintes campos:
+                - message: uma mensagem de resposta ao fã
+                - recommendations: uma lista de objetos com: type, title, link
+                ";
+            }
+            else if(jogoFavorito.ToLower() == "rainbow six")
+            {
+                prompt = $@"
+                Informe sobre o time de Rainbow Six da FURIA.
+                Responda o que o fã disse: '{mensagem}'.
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'Voice Comms FURIA R6 no #SixInvitational Boston - Fase de grupos' 'https://www.youtube.com/watch?v=CIXy3M2kQxA'.
+
+                Forneça um JSON com os seguintes campos:
+                - message: uma mensagem de resposta ao fã
+                - recommendations: uma lista de objetos com: type, title, link
+                ";
+            }
             else
             {
-                prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: message, recommendations (com type, title, link).";
+                prompt = $@"
+                Informe sobre o time de Apex Legends da FURIA.
+                Responda o que o fã disse: '{mensagem}'.
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'ALGS Final Circles Day 1 (ft. LG, Furia, Virtus Pros, NRG & More ) | ALGS Open' 'https://www.youtube.com/watch?v=00Dqtnwtico'.
+
+                Forneça um JSON com os seguintes campos:
+                - message: uma mensagem de resposta ao fã
+                - recommendations: uma lista de objetos com: type, title, link
+                ";
             }
 
             var requestBody = new
