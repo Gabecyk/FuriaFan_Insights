@@ -94,7 +94,10 @@ namespace FuriaAPI.Services
                 }
 
                 var cleanedJson = text.Replace("```json", "").Replace("```", "").Trim();
-                var aiResponse = JsonSerializer.Deserialize<AIResponse>(cleanedJson);
+                var aiResponse = JsonSerializer.Deserialize<AIResponse>(
+                    cleanedJson,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                );
 
                 if (aiResponse == null || aiResponse.Recommendations == null)
                 {
