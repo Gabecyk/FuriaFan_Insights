@@ -37,7 +37,15 @@ namespace FuriaAPI.Services
 
 
             if (jogoFavorito == "Valorant")
-                prompt = $"Fale sobre o time de valorant da Furia, recomende esse link da furia instagram 'https://www.instagram.com/furiagg/', recomende esse link do youtube da furia 'https://www.youtube.com/watch?v=tjMs5UuK_S8'. E responda oque o fã disse :{mensagem}. Forneça um JSON com: type, title, link.";
+                prompt = $@"
+                Fale sobre o time de Valorant da FURIA.
+                Responda o que o fã disse: '{mensagem}'.
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o YouTube 'https://www.youtube.com/watch?v=tjMs5UuK_S8'.
+
+                Forneça um JSON com os seguintes campos:
+                - message: uma mensagem de resposta ao fã
+                - recommendations: uma lista de objetos com: type, title, link
+                ";
             else if (jogoFavorito == "Counter Strike 2")
                 prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
             else if (jogoFavorito == "Rocket League")
