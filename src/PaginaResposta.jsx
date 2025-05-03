@@ -47,13 +47,13 @@ function PaginaResposta() {
     const getNivelMensagem = (tempo) => {
         switch (tempo) {
             case "menos de 1 ano":
-                return "Fã iniciante! Veja os conteúdos abaixo da FURIA sobre seus interesses.";
+                return "Fã iniciante!";
             case "1 a 3 anos":
-                return "Fã Raiz! Veja os conteúdos abaixo da FURIA sobre seus interesses.";
+                return "Fã Raiz!";
             case "mais de 3 anos":
-                return "FURIOSO MASTER! Veja os conteúdos abaixo da FURIA sobre seus interesses.";
+                return "FURIOSO MASTER!";
             default:
-                return "Fã Iniciante! Veja os conteúdos abaixo da FURIA sobre seus interesses.";
+                return "Fã Iniciante!";
         }
     };
 
@@ -63,36 +63,49 @@ function PaginaResposta() {
 
     return (
         <div className="resultPage">
-            <h2>{getNivelMensagem(resposta?.tempoFuria)}</h2>
-
-            {loading ? (
-                <div>Carregando recomendações...</div>
-            ) : (
-                <div>
-                    {message && (
-                        <div className="mensagem-personalizada">
-                            <p><strong>Mensagem para você:</strong> {message}</p>
-                        </div>
-                    )}
-
-                    <h3>Conteúdo Recomendado:</h3>
-
-                    {recommendations.length > 0 ? (
-                        <ul>
-                            {recommendations.map((item, index) => (
-                                <li key={index}>
-                                    <strong>{item.type}:</strong>{" "}
-                                    <a href={item.link} target="_blank" rel="noopener noreferrer">
-                                        {item.title}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>Nenhum conteúdo recomendado encontrado.</p>
-                    )}
+            <div className="pageUP">
+                <div className="infoRes">
+                    <p>Nome: <span className="spanRes">{resposta.nome}</span></p>
+                    <p>Plataforma: <span className="spanRes">{resposta.plataforma}</span></p>
+                    <p>Tempo de Furia: <span className="spanRes">{resposta.tempoFuria}</span></p>
                 </div>
-            )}
+
+                <div>
+                    <h2>Olá <span className="nameh2Name">{resposta.nome}</span>!</h2>
+                    <h2>Você é um <span className="nameh2Mensage">{getNivelMensagem(resposta?.tempoFuria)}</span> Veja os conteúdos abaixo da FURIA sobre seus interesses.</h2>
+                </div>
+
+                <div></div>
+            </div>
+
+            <div className="recommedation">
+                {loading ? (
+                    <div>Carregando recomendações...</div>
+                ) : (
+                    <div className="recommedationInside">
+                        {message && (
+                            <div className="mensagem-personalizada">
+                                <p className="message"> {message}</p>
+                            </div>
+                        )}
+                        <h3>Conteúdo Recomendado:</h3>
+                        {recommendations.length > 0 ? (
+                            <ul>
+                                {recommendations.map((item, index) => (
+                                    <li key={index}>
+                                        <strong>{item.type}:</strong>{" "}
+                                        <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                            {item.title}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>Nenhum conteúdo recomendado encontrado.</p>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

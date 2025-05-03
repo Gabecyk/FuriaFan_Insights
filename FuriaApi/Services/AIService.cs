@@ -37,6 +37,7 @@ namespace FuriaAPI.Services
             {
                 prompt = $@"
                 Você é um assistente informe sobre o time de Valorant da FURIA.
+                Fale mais sobre a organização Furia Esportes.
                 Responda o que o fã disse: '{mensagem}'.
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'conheça o time da furia' 'https://www.youtube.com/watch?v=tjMs5UuK_S8'.
 
@@ -49,6 +50,7 @@ namespace FuriaAPI.Services
             {
                 prompt = $@"
                 Você é um assistente informe sobre o time de CS GO 2 da FURIA.
+                Fale mais sobre a organização Furia Esportes.
                 Responda o que o fã disse: '{mensagem}'.
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'FURIA vs APOGEE - MELHORES MOMENTOS - PGL BUCHAREST 2025' 'https://www.youtube.com/watch?v=MvNP9FuN4qU'.
 
@@ -61,6 +63,7 @@ namespace FuriaAPI.Services
             {
                 prompt = $@"
                 Você é um assistente informe sobre o time de Rocket League da FURIA.
+                Fale mais sobre a organização Furia Esportes.
                 Responda o que o fã disse: '{mensagem}'.
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'Best of Furia | RLCS 22-23 Spring Invitational | Rocket League' 'https://www.youtube.com/watch?v=BDXfF9-4BKo'.
 
@@ -73,6 +76,7 @@ namespace FuriaAPI.Services
             {
                 prompt = $@"
                 Você é um assistente informe sobre o time de League of Legends da FURIA.
+                Fale mais sobre a organização Furia Esportes.
                 Responda o que o fã disse: '{mensagem}'.
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'FOLLOW THE STEPS: Vlog 01 da FURIA LoL na LTA Sul' 'https://www.youtube.com/watch?v=zKe3MLpsddM&t=10s'.
 
@@ -85,6 +89,7 @@ namespace FuriaAPI.Services
             {
                 prompt = $@"
                 Você é um assistente informe sobre o time de Rainbow Six da FURIA.
+                Fale mais sobre a organização Furia Esportes.
                 Responda o que o fã disse: '{mensagem}'.
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'Voice Comms FURIA R6 no #SixInvitational Boston - Fase de grupos' 'https://www.youtube.com/watch?v=CIXy3M2kQxA'.
 
@@ -97,6 +102,7 @@ namespace FuriaAPI.Services
             {
                 prompt = $@"
                 Você é um assistente informe sobre o time de Apex Legends da FURIA.
+                Fale mais sobre a organização Furia Esportes.
                 E responda o que o fã disse: '{mensagem}'.
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'ALGS Final Circles Day 1 (ft. LG, Furia, Virtus Pros, NRG & More ) | ALGS Open' 'https://www.youtube.com/watch?v=00Dqtnwtico'.
 
