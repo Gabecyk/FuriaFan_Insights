@@ -42,6 +42,7 @@ function FormularioFuria() {
     const dados = { nome, tempoFuria, jogoFavorito, plataforma, mensagem };
     dados.plataforma = "Pc";
     dados.tempoFuria = "menos de 1 ano";
+    dados.jogoFavorito = "Valorant"
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Fan`, {
