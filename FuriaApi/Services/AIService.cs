@@ -33,7 +33,7 @@ namespace FuriaAPI.Services
                 return new List<Recommendation>();
             }
 
-            string prompt;
+            string prompt = "";
 
             if (string.IsNullOrEmpty(mensagem))
             {
@@ -45,7 +45,7 @@ namespace FuriaAPI.Services
                     prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
                 else if(jogoFavorito == "League of Legends")
                     prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
-                else if(jogoFavorito == "Rainbow Six")
+                else
                     prompt = $"Recomende 3 conteúdos interessantes para um fã que disse: '{mensagem}'. Forneça um JSON com: type, title, link.";
                 
             }
