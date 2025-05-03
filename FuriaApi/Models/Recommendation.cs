@@ -4,9 +4,10 @@ namespace FuriaAPI.Models
 {
     public class Recommendation
     {
-        public string Type { get; set; } // Ex: "YouTube", "Twitter", "Instagram"
-        public string Title { get; set; }
-        public string Link { get; set; }
-        public List<string> Tags { get; set; } // Tags para facilitar a busca/filtragem
+        public required string Type { get; set; }
+        public required string Title { get; set; }
+        public required string Link { get; set; }
+        public required List<string> Tags { get; set; }
     }
+
 }

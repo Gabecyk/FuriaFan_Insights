@@ -52,6 +52,11 @@ namespace FuriaAPI.Services
             var response = await _httpClient.PostAsync("v1/chat", content);
             var responseString = await response.Content.ReadAsStringAsync();
 
+
+            // 💬 Adicione este log:
+            Console.WriteLine("🟡 Resposta bruta da API Cohere:");
+            Console.WriteLine(responseString);
+
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine("Erro da API Cohere: " + responseString);
