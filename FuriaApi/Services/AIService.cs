@@ -11,10 +11,12 @@ namespace FuriaAPI.Services
     {
         private readonly HttpClient _httpClient;
         private readonly string _apiKey;
+        private readonly YouTubeService _youTubeService;
 
-        public AIService(IConfiguration configuration)
+        public AIService(IConfiguration configuration, YouTubeService youTubeService)
         {
             _apiKey = configuration["COHERE_API_KEY"];
+            _youTubeService = youTubeService;
             _httpClient = new HttpClient
             {
                 BaseAddress = new Uri("https://api.cohere.ai/")
@@ -30,95 +32,58 @@ namespace FuriaAPI.Services
                 mensagem = "Fale mais sobre o time/organização da FURIA Esport";
             }
 
-            string prompt = "";
-
-            if (jogoFavorito.ToLower() == "valorant")
+            var jogo = jogoFavorito.ToLower();
+            string prompt = jogo switch
             {
-                prompt = $@"
-                Você é um assistente informe sobre o time de Valorant da FURIA.
-                Fale mais sobre a organização Furia Esportes.
-                Responda o que o fã disse: '{mensagem}'.
-                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'conheça o time da furia' 'https://www.youtube.com/watch?v=tjMs5UuK_S8'.
-
-                Forneça um JSON com os seguintes campos:
-                - message: uma mensagem de resposta ao fã
-                - recommendations: uma lista de objetos com: type, title, link
-                ";
-            }
-            else if(jogoFavorito.ToLower() == "counter strike 2")
-            {
-                prompt = $@"
-                Você é um assistente informe sobre o time de CS GO 2 da FURIA.
-                Fale mais sobre a organização Furia Esportes.
-                Responda o que o fã disse: '{mensagem}'.
-                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'FURIA vs APOGEE - MELHORES MOMENTOS - PGL BUCHAREST 2025' 'https://www.youtube.com/watch?v=MvNP9FuN4qU'.
-
-                Forneça um JSON com os seguintes campos:
-                - message: uma mensagem de resposta ao fã
-                - recommendations: uma lista de objetos com: type, title, link
-                ";
-            }
-            else if(jogoFavorito.ToLower() == "rocket league")
-            {
-                prompt = $@"
-                Você é um assistente informe sobre o time de Rocket League da FURIA.
-                Fale mais sobre a organização Furia Esportes.
-                Responda o que o fã disse: '{mensagem}'.
-                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'Best of Furia | RLCS 22-23 Spring Invitational | Rocket League' 'https://www.youtube.com/watch?v=BDXfF9-4BKo'.
-
-                Forneça um JSON com os seguintes campos:
-                - message: uma mensagem de resposta ao fã
-                - recommendations: uma lista de objetos com: type, title, link
-                ";
-            }
-            else if(jogoFavorito.ToLower() == "league of legends")
-            {
-                prompt = $@"
-                Você é um assistente informe sobre o time de League of Legends da FURIA.
-                Fale mais sobre a organização Furia Esportes.
-                Responda o que o fã disse: '{mensagem}'.
-                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'FOLLOW THE STEPS: Vlog 01 da FURIA LoL na LTA Sul' 'https://www.youtube.com/watch?v=zKe3MLpsddM&t=10s'.
-
-                Forneça um JSON com os seguintes campos:
-                - message: uma mensagem de resposta ao fã
-                - recommendations: uma lista de objetos com: type, title, link
-                ";
-            }
-            else if(jogoFavorito.ToLower() == "rainbow six")
-            {
-                prompt = $@"
-                Você é um assistente informe sobre o time de Rainbow Six da FURIA.
-                Fale mais sobre a organização Furia Esportes.
-                Responda o que o fã disse: '{mensagem}'.
-                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'Voice Comms FURIA R6 no #SixInvitational Boston - Fase de grupos' 'https://www.youtube.com/watch?v=CIXy3M2kQxA'.
-
-                Forneça um JSON com os seguintes campos:
-                - message: uma mensagem de resposta ao fã
-                - recommendations: uma lista de objetos com: type, title, link
-                ";
-            }
-            else
-            {
-                prompt = $@"
-                Você é um assistente informe sobre o time de Apex Legends da FURIA.
-                Fale mais sobre a organização Furia Esportes.
-                E responda o que o fã disse: '{mensagem}'.
-                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o video do YouTube 'ALGS Final Circles Day 1 (ft. LG, Furia, Virtus Pros, NRG & More ) | ALGS Open' 'https://www.youtube.com/watch?v=00Dqtnwtico'.
-
-                Forneça um JSON com os seguintes campos:
-                - message: uma mensagem de resposta ao fã
-                - recommendations: uma lista de objetos com: type, title, link
-                ";
-            }
+                "valorant" => $@"
+                Você é um assistente. Informe sobre o time de Valorant da FURIA.
+                Fale sobre a organização FURIA Esports.
+                Responda: '{mensagem}'
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=tjMs5UuK_S8'
+                Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
+                ",
+                                "counter strike 2" => $@"
+                Você é um assistente. Informe sobre o time de Counter-Strike 2 da FURIA.
+                Fale sobre a organização FURIA Esports.
+                Responda: '{mensagem}'
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=MvNP9FuN4qU'
+                Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
+                ",
+                                "rocket league" => $@"
+                Você é um assistente. Informe sobre o time de Rocket League da FURIA.
+                Fale sobre a organização FURIA Esports.
+                Responda: '{mensagem}'
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=BDXfF9-4BKo'
+                Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
+                ",
+                                "league of legends" => $@"
+                Você é um assistente. Informe sobre o time de League of Legends da FURIA.
+                Fale sobre a organização FURIA Esports.
+                Responda: '{mensagem}'
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=zKe3MLpsddM&t=10s'
+                Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
+                ",
+                                "rainbow six" => $@"
+                Você é um assistente. Informe sobre o time de Rainbow Six da FURIA.
+                Fale sobre a organização FURIA Esports.
+                Responda: '{mensagem}'
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=CIXy3M2kQxA'
+                Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
+                ",
+                                _ => $@"
+                Você é um assistente. Informe sobre o time de Apex Legends da FURIA.
+                Fale sobre a organização FURIA Esports.
+                Responda: '{mensagem}'
+                Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=00Dqtnwtico'
+                Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
+"
+            };
 
             var requestBody = new
             {
                 model = "command-r",
                 message = prompt,
-                chat_history = new[]
-                {
-                    new { role = "USER", message = mensagem }
-                },
+                chat_history = new[] { new { role = "USER", message = mensagem } },
                 temperature = 0.7
             };
 
@@ -138,42 +103,50 @@ namespace FuriaAPI.Services
             try
             {
                 using var doc = JsonDocument.Parse(responseString);
-                var text = doc.RootElement.GetProperty("text").GetString();
+                var root = doc.RootElement;
 
-                if (string.IsNullOrWhiteSpace(text))
+                // Busca o JSON gerado pela IA (geralmente em generations[0].text)
+                var aiJson = root.GetProperty("generations")[0].GetProperty("text").GetString();
+                if (string.IsNullOrWhiteSpace(aiJson))
                 {
-                    Console.WriteLine("Resposta da API Cohere não contém texto.");
+                    Console.WriteLine("Texto gerado vazio.");
                     return null;
                 }
 
-                var cleanedJson = text.Replace("```json", "").Replace("```", "").Trim();
+                var cleanedJson = aiJson.Replace("```json", "").Replace("```", "").Trim();
 
                 var aiResponse = JsonSerializer.Deserialize<AIResponse>(
                     cleanedJson,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
                 );
 
-                if (aiResponse == null || aiResponse.Recommendations == null)
+                if (aiResponse?.Recommendations == null)
                 {
-                    Console.WriteLine("Resposta não contém recomendações válidas.");
+                    Console.WriteLine("Recomendações ausentes na resposta.");
                     return null;
                 }
+
+                var cohereRecs = aiResponse.Recommendations.Select(r => new Recommendation
+                {
+                    Type = r.Type,
+                    Title = r.Title,
+                    Link = r.Link,
+                    Tags = new List<string>()
+                }).ToList();
+
+                // 🔥 Adiciona vídeos do YouTube relacionados
+                var youtubeRecs = await _youTubeService.SearchFuriaVideos(jogoFavorito);
+                cohereRecs.AddRange(youtubeRecs);
 
                 return new RecommendationResponse
                 {
                     Message = aiResponse.Message,
-                    Recommendations = aiResponse.Recommendations.Select(item => new Recommendation
-                    {
-                        Type = item.Type,
-                        Title = item.Title,
-                        Link = item.Link,
-                        Tags = new List<string>()
-                    }).ToList()
+                    Recommendations = cohereRecs
                 };
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao interpretar resposta: " + ex.Message);
+                Console.WriteLine($"Erro ao processar resposta da IA: {ex.Message}");
                 return null;
             }
         }

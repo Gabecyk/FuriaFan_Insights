@@ -12,6 +12,7 @@ builder.Configuration
 
 //  Serviços
 builder.Services.AddSingleton<MongoDbService>();
+builder.Services.AddSingleton<YouTubeService>();
 builder.Services.AddHttpClient<AIService>(); // Usa IHttpClientFactory
 builder.Services.AddTransient<AIService>();
 

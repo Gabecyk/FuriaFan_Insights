@@ -62,7 +62,6 @@ function PaginaResposta() {
     }
 
     return (
-
         <div className="resultPage">
             <div className="afterResult">
                 <div className="pageUP">
@@ -75,7 +74,6 @@ function PaginaResposta() {
                         <h2>Olá <span className="nameh2Name">{resposta.nome}</span>!</h2>
                         <h2>Você é um <span className="nameh2Mensage">{getNivelMensagem(resposta?.tempoFuria)}</span> Veja os conteúdos abaixo da FURIA sobre seus interesses.</h2>
                     </div>
-                    <div></div>
                 </div>
                 <div className="recommedation">
                     {loading ? (
@@ -92,7 +90,14 @@ function PaginaResposta() {
                                 <ul>
                                     {recommendations.map((item, index) => (
                                         <li key={index}>
-                                            <strong>{item.type}:</strong>{" "}
+                                            <strong>
+                                                {item.type === "YouTube"
+                                                    ? "📺"
+                                                    : item.type === "Instagram"
+                                                    ? "📷"
+                                                    : "🔗"}{" "}
+                                                {item.type}:
+                                            </strong>{" "}
                                             <a href={item.link} target="_blank" rel="noopener noreferrer">
                                                 {item.title}
                                             </a>
@@ -105,10 +110,8 @@ function PaginaResposta() {
                         </div>
                     )}
                 </div>
-
             </div>
         </div>
-
     );
 }
 
