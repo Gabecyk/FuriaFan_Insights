@@ -4,20 +4,20 @@ using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔐 Carrega configurações com suporte a variáveis de ambiente e appsettings.Local.json
+//  Carrega configurações com suporte a variáveis de ambiente e appsettings.Local.json
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
-// 📦 Serviços
+//  Serviços
 builder.Services.AddSingleton<MongoDbService>();
 builder.Services.AddHttpClient<AIService>(); // Usa IHttpClientFactory
 builder.Services.AddTransient<AIService>();
 
 builder.Services.AddControllers();
 
-// 🌐 CORS
+//  CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -30,7 +30,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// ⚠️ Validação de modelos customizada
+//  Validação de modelos customizada
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.InvalidModelStateResponseFactory = actionContext =>
@@ -53,16 +53,16 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     };
 });
 
-// 🧭 Logging
+//  Logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
-// 🔍 Swagger
+//  Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 🚀 Pipeline
+//  Pipeline
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
