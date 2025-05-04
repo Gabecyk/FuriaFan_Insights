@@ -23,12 +23,17 @@ function FormularioFuria() {
   const [mensagem, setMensagem] = useState('');
   const navigate = useNavigate();
 
+  const dados = { nome, tempoFuria, jogoFavorito, plataforma, mensagem };
+  dados.plataforma = "Pc";
+  dados.tempoFuria = "menos de 1 ano";
+  dados.jogoFavorito = "Valorant"
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = {};
     if (!nome.trim()) newErrors.nome = "Nome é obrigatório.";
-    
+
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -38,11 +43,6 @@ function FormularioFuria() {
     setErrors({}); // limpa erros se tudo ok
 
     setIsSubmitting(true);
-
-    const dados = { nome, tempoFuria, jogoFavorito, plataforma, mensagem };
-    dados.plataforma = "Pc";
-    dados.tempoFuria = "menos de 1 ano";
-    dados.jogoFavorito = "Valorant"
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Fan`, {
@@ -114,7 +114,7 @@ function FormularioFuria() {
             <option value="1 a 3 anos">1 a 3 anos</option>
             <option value="mais de 3 anos">Mais de 3 anos</option>
           </select>
-          
+
           <p>Jogo Favorito</p>
           <select value={jogoFavorito} onChange={e => setJogoFavorito(e.target.value)}>
             <option value="Valorant">Valorant</option>
