@@ -42,35 +42,35 @@ namespace FuriaAPI.Services
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=tjMs5UuK_S8'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
                 ",
-                                "counter strike 2" => $@"
+                "counter strike 2" => $@"
                 Você é um assistente. Informe sobre o time de Counter-Strike 2 da FURIA.
                 Fale sobre a organização FURIA Esports.
                 Responda: '{mensagem}'
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=MvNP9FuN4qU'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
                 ",
-                                "rocket league" => $@"
+                "rocket league" => $@"
                 Você é um assistente. Informe sobre o time de Rocket League da FURIA.
                 Fale sobre a organização FURIA Esports.
                 Responda: '{mensagem}'
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=BDXfF9-4BKo'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
                 ",
-                                "league of legends" => $@"
+                "league of legends" => $@"
                 Você é um assistente. Informe sobre o time de League of Legends da FURIA.
                 Fale sobre a organização FURIA Esports.
                 Responda: '{mensagem}'
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=zKe3MLpsddM&t=10s'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
                 ",
-                                "rainbow six" => $@"
+                "rainbow six" => $@"
                 Você é um assistente. Informe sobre o time de Rainbow Six da FURIA.
                 Fale sobre a organização FURIA Esports.
                 Responda: '{mensagem}'
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=CIXy3M2kQxA'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
                 ",
-                                _ => $@"
+                _ => $@"
                 Você é um assistente. Informe sobre o time de Apex Legends da FURIA.
                 Fale sobre a organização FURIA Esports.
                 Responda: '{mensagem}'
@@ -103,17 +103,22 @@ namespace FuriaAPI.Services
             try
             {
                 using var doc = JsonDocument.Parse(responseString);
-                var root = doc.RootElement;
 
-                // Busca o JSON gerado pela IA (geralmente em generations[0].text)
-                var aiJson = root.GetProperty("generations")[0].GetProperty("text").GetString();
-                if (string.IsNullOrWhiteSpace(aiJson))
+                if (!doc.RootElement.TryGetProperty("text", out JsonElement textElement))
+                {
+                    Console.WriteLine("❌ Resposta da API Cohere não contém 'text'.");
+                    return null;
+                }
+
+                var text = textElement.GetString();
+
+                if (string.IsNullOrWhiteSpace(text))
                 {
                     Console.WriteLine("Texto gerado vazio.");
                     return null;
                 }
 
-                var cleanedJson = aiJson.Replace("```json", "").Replace("```", "").Trim();
+                var cleanedJson = text.Replace("```json", "").Replace("```", "").Trim();
 
                 var aiResponse = JsonSerializer.Deserialize<AIResponse>(
                     cleanedJson,
