@@ -44,12 +44,3 @@ namespace FuriaAPI.Controllers
 }
 
 
-/*
-string nivel = fan.TempoFuria switch
-            {
-                "menos de 1 ano" => "Iniciante",
-                "1 a 3 anos" => "Fã Raiz",
-                "mais de 3 anos" => "FURIOSO MASTER",
-                _ => "Desconhecido"
-            };
-            */

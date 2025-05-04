@@ -17,20 +17,19 @@ function FormularioFuria() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const [nome, setNome] = useState('');
-  const [tempoFuria, setTempoFuria] = useState('');
-  const [jogoFavorito, setJogoFavorito] = useState('');
-  const [plataforma, setPlataforma] = useState('');
+  const [tempoFuria, setTempoFuria] = useState('menos de 1 ano');
+  const [jogoFavorito, setJogoFavorito] = useState('Valorant');
+  const [plataforma, setPlataforma] = useState('Pc');
   const [mensagem, setMensagem] = useState('');
   const navigate = useNavigate();
 
-  const dados = { nome, tempoFuria, jogoFavorito, plataforma, mensagem };
-  dados.plataforma = "Pc";
-  dados.tempoFuria = "menos de 1 ano";
-  dados.jogoFavorito = "Valorant"
-
+  
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
+    const dados = { nome, tempoFuria, jogoFavorito, plataforma, mensagem };
+    
     const newErrors = {};
     if (!nome.trim()) newErrors.nome = "Nome é obrigatório.";
 

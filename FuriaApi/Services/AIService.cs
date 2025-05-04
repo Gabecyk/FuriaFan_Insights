@@ -27,8 +27,7 @@ namespace FuriaAPI.Services
         {
             if (string.IsNullOrWhiteSpace(mensagem))
             {
-                Console.WriteLine("Erro: Mensagem do fã está vazia.");
-                return null;
+                mensagem = "Fale mais sobre o time/organização da FURIA Esport";
             }
 
             string prompt = "";
