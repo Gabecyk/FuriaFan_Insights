@@ -134,7 +134,7 @@ namespace FuriaAPI.Services
                     Tags = new List<string>()
                 }).ToList();
 
-                // 🔥 Adiciona vídeos do YouTube relacionados
+                // Adiciona vídeos do YouTube relacionados
                 var youtubeRecs = await _youTubeService.SearchFuriaVideos(jogoFavorito);
                 cohereRecs.AddRange(youtubeRecs);
 
