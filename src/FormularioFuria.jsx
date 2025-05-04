@@ -29,7 +29,6 @@ function FormularioFuria() {
     e.preventDefault();
     
     const dados = { nome, tempoFuria, jogoFavorito, plataforma, mensagem };
-    dados.mensagem = "Fale sobre a Furia"
 
     const newErrors = {};
     if (!nome.trim()) newErrors.nome = "Nome é obrigatório.";

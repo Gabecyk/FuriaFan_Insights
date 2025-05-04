@@ -226,7 +226,7 @@
     background-image: image-set('./assets/papeldeparedefuria.png');
     height: 100%;
     width: 100%;
-    min-height: 100%;
+    
     padding-top: 50px;
 }
 
@@ -420,6 +420,10 @@
 
     .recommedationInside > ul > li {
         font-size: 14pt;
+    }
+    
+    .afterResult {
+        height: 100%;
     }
 
 }
