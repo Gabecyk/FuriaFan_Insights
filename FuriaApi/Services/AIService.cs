@@ -36,7 +36,7 @@ namespace FuriaAPI.Services
             string prompt = jogo switch
             {
                 "valorant" => $@"
-                Responda somente com um JSON. Não adicione explicações nem texto fora do JSON.
+                Responda somente com um JSON. adicione explicações e texto dentro do JSON.
                 Você é um assistente. Informe sobre o time de Valorant da FURIA.
                 Fale sobre a organização FURIA Esports.
                  Responda: '{mensagem}, se não der para responder, responda falando sobre a Furia
