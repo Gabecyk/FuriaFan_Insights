@@ -71,8 +71,8 @@ function PaginaResposta() {
                         <p>Tempo de Furia: <span className="spanRes">{resposta.tempoFuria}</span></p>
                     </div>
                     <div>
-                        <h2>Olá <span className="nameh2Name">{resposta.nome}</span>!</h2>
-                        <h2>Você é um <span className="nameh2Mensage">{getNivelMensagem(resposta?.tempoFuria)}</span> Veja os conteúdos abaixo da FURIA sobre seus interesses.</h2>
+                        <h2 id="Mensage">Olá <span className="nameh2Name">{resposta.nome}</span>!</h2>
+                        <h2 id="Mensage">Você é um <span className="nameh2Mensage">{getNivelMensagem(resposta?.tempoFuria)}</span> Veja os conteúdos abaixo da FURIA sobre seus interesses.</h2>
                     </div>
                 </div>
                 <div className="recommedation">

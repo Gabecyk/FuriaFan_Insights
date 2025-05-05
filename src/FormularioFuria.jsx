@@ -32,6 +32,7 @@ function FormularioFuria() {
 
     const newErrors = {};
     if (!nome.trim()) newErrors.nome = "Nome é obrigatório.";
+    if (!mensagem.trim()) newErrors.mensagem = "Mensagem é obrigatória.";
 
 
     if (Object.keys(newErrors).length > 0) {
@@ -105,8 +106,8 @@ function FormularioFuria() {
       <div className='formPart'>
         <form ref={formularioRef} className='form' onSubmit={handleSubmit}>
           <p>Nome</p>
-          <input placeholder="Seu Nome" value={nome} onChange={e => setNome(e.target.value)} />
           {errors.nome && <span style={{ color: 'red', fontSize: '13pt', fontFamily: 'Arial, Helvetica, sans-serif' }}>{errors.nome}</span>}
+          <input placeholder="Seu Nome" value={nome} onChange={e => setNome(e.target.value)} />
           <p>Tempo de Furia</p>
           <select value={tempoFuria} onChange={e => setTempoFuria(e.target.value)}>
             <option value="menos de 1 ano">Menos de 1 ano</option>
@@ -131,6 +132,7 @@ function FormularioFuria() {
             <option value="Celular">Celular</option>
           </select>
           <p>Espaço para pergunta</p>
+          {errors.mensagem && <span style={{ color: 'red', fontSize: '13pt', fontFamily: 'Arial, Helvetica, sans-serif' }}>{errors.mensagem}</span>}
           <textarea placeholder="Ex: Qual o time de Rocket League da Furia" value={mensagem} onChange={e => setMensagem(e.target.value)} />
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? (

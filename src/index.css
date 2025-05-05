@@ -435,3 +435,55 @@
         padding-top: 40px;
     }
 }
+
+@media (min-width: 768px) and (max-width: 1500px) {
+    .subH2 {
+        font-size: 25pt;
+    }
+    
+    .form > p {
+        font-size: 12pt;
+    }
+    .form > input {
+        font-size: 10pt;
+        height: 35px;
+    }
+
+    .form > select {
+        font-size: 10pt;
+        height: 35px;
+    }
+
+    .form > textarea {
+        height: 80px;
+    }
+
+    .form > button {
+        font-size: 15pt;
+        height: 50px;
+    }
+
+    .infoRes {
+       font-size: 12pt;
+    }
+
+    .ih2info > h2{
+        font-size: 5pt;
+    }
+
+    #Mensage {
+        font-size: 20pt;
+    }
+
+    .message {
+        font-size: 15pt;
+    }
+
+    .recommedationInside > h3 {
+        font-size: 15pt;
+    }
+
+    .recommedationInside > ul > li {
+        font-size: 12pt;
+    }
+}
