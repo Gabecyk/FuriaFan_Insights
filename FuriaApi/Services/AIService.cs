@@ -36,44 +36,50 @@ namespace FuriaAPI.Services
             string prompt = jogo switch
             {
                 "valorant" => $@"
+                Responda somente com um JSON. Não adicione explicações nem texto fora do JSON.
                 Você é um assistente. Informe sobre o time de Valorant da FURIA.
                 Fale sobre a organização FURIA Esports.
-                Responda: '{mensagem}'
+                Responda: '{mensagem}, caso {mensagem} seja algo null ou caracteres aleatorios pode ignorar de responder, apenas responda se for uma pergunta'
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=tjMs5UuK_S8'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
                 ",
                 "counter strike 2" => $@"
+                Responda somente com um JSON. Não adicione explicações nem texto fora do JSON.
                 Você é um assistente. Informe sobre o time de Counter-Strike 2 da FURIA.
                 Fale sobre a organização FURIA Esports.
-                Responda: '{mensagem}'
+                Responda: '{mensagem}, caso {mensagem} seja algo null ou caracteres aleatorios pode ignorar de responder, apenas responda se for uma pergunta'
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=MvNP9FuN4qU'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
                 ",
                 "rocket league" => $@"
+                Responda somente com um JSON. Não adicione explicações nem texto fora do JSON.
                 Você é um assistente. Informe sobre o time de Rocket League da FURIA.
                 Fale sobre a organização FURIA Esports.
-                Responda: '{mensagem}'
+                Responda: '{mensagem}, caso {mensagem} seja algo null ou caracteres aleatorios pode ignorar de responder, apenas responda se for uma pergunta'
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=BDXfF9-4BKo'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
                 ",
                 "league of legends" => $@"
+                Responda somente com um JSON. Não adicione explicações nem texto fora do JSON.
                 Você é um assistente. Informe sobre o time de League of Legends da FURIA.
                 Fale sobre a organização FURIA Esports.
-                Responda: '{mensagem}'
+                Responda: '{mensagem}, caso {mensagem} seja algo null ou caracteres aleatorios pode ignorar de responder, apenas responda se for uma pergunta'
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=zKe3MLpsddM&t=10s'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
                 ",
                 "rainbow six" => $@"
+                Responda somente com um JSON. Não adicione explicações nem texto fora do JSON.
                 Você é um assistente. Informe sobre o time de Rainbow Six da FURIA.
                 Fale sobre a organização FURIA Esports.
-                Responda: '{mensagem}'
+                Responda: '{mensagem}, caso {mensagem} seja algo null ou caracteres aleatorios pode ignorar de responder, apenas responda se for uma pergunta'
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=CIXy3M2kQxA'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
                 ",
                 _ => $@"
+                Responda somente com um JSON. Não adicione explicações nem texto fora do JSON.
                 Você é um assistente. Informe sobre o time de Apex Legends da FURIA.
                 Fale sobre a organização FURIA Esports.
-                Responda: '{mensagem}'
+                Responda: '{mensagem}, caso {mensagem} seja algo null ou caracteres aleatorios pode ignorar de responder, apenas responda se for uma pergunta'
                 Recomende o Instagram 'https://www.instagram.com/furiagg/' e o vídeo 'https://www.youtube.com/watch?v=00Dqtnwtico'
                 Forneça um JSON com: message, recommendations (lista de objetos com: type, title, link)
 "
