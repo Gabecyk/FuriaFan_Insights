@@ -50,4 +50,7 @@ YouTube API AI - https://console.cloud.google.com/apis/library/youtube.googleapi
 ![image](https://github.com/user-attachments/assets/ea1a87d9-60d8-4c0b-9dd0-810d6a8ca679)
 
 
+# FIGMA
 
+Criei apenas protótipos para seguir e mudei para o código conforme achei melhor.
+https://www.figma.com/design/eGAdFjR9RJ7wornvJtfCQu/Gabriel-bg-s-team-library?node-id=0-1&t=HpUQATvooOVQxTod-1
