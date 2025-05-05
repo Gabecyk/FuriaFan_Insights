@@ -2,7 +2,7 @@
 
 
 Site - https://furiafaninsights.netlify.app/ 
-Obs: Também disponível para visualização em celulares com responsabilidade
+Obs: Também disponível para visualização em celulares com responsabilidade.
 
 
 # Introdução
