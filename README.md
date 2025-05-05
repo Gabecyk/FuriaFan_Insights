@@ -1,6 +1,9 @@
 # FuriaFan Insights
 
 
+Site - https://furiafaninsights.netlify.app/
+
+
 # Introdução
 
 FuriaFan Insights é uma aplicação WEB que ajuda o fã conhecer ainda mais sobre a FURIA, em base de seu jogo favorito.
