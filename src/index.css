@@ -264,18 +264,19 @@
     border: 1px solid black;
     font-family: "Anton", sans-serif;
     font-weight: lighter;
+    color: white;
 }
 
 .spanRes {
-    color: yellow;
+    color: #8C52FF;
 }
 
 .nameh2Name {
-    text-shadow: 2px 2px 2px purple;
+    color: #ADD8E6;
 }
 
 .nameh2Mensage {
-    text-shadow: 2px 2px 2px red;
+    color: #FFA500;
 }
 
 .recommedation {
