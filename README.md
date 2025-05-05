@@ -46,4 +46,7 @@ YouTube API AI - https://console.cloud.google.com/apis/library/youtube.googleapi
 
 5 - Pós carregamento das recomendações, veja os vídeos recomendados para ficar por dentro do tópico da Furia :)
 
+![image](https://github.com/user-attachments/assets/ea1a87d9-60d8-4c0b-9dd0-810d6a8ca679)
+
+
 
