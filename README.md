@@ -1,7 +1,8 @@
 # FuriaFan Insights
 
 
-Site - https://furiafaninsights.netlify.app/
+Site - https://furiafaninsights.netlify.app/ 
+Obs: Também disponível para visualização em celulares com responsabilidade
 
 
 # Introdução
